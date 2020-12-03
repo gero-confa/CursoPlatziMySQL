@@ -40,4 +40,10 @@ CREATE TABLE IF NOT EXISTS operations(
 -- INSERT INTO tabla(COLUMNAS*) VALUES(VALORES)
 INSERT INTO authors(author_id, name, nationality) VALUES('','Juan Rulfo','MEX');
 INSERT INTO authors(name, nationality) VALUES('Gabriel Garcia Márquez', 'COL');
-INSERT INTO authors() VALUES ('', 'Juan Gabriel Vazquez', 'COL');
+INSERT INTO authors() VALUES ('0', 'Juan Gabriel Vazquez', 'COL');
+
+-- para varias inserciones en una sola sentencia / usualmente en chunks de 50
+INSERT INTO authors(name, nationality) VALUES('Julio Cortazar', 'ARG'),
+('Isabel Allende', 'CHI'),
+('Octavio Paz','MEX'),
+('Juan Carlos Onetti', 'URU');
