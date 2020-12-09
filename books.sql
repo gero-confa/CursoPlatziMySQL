@@ -1,3 +1,5 @@
+-- DROP DATABASE IF EXIST 
+
 CREATE TABLE IF NOT EXISTS books (
     book_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     author_id INTEGER UNSIGNED ,
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS operations(
     finished TINYINT(1) NOT NULL DEFAULT 1
 );
 -- INSERT INTO tabla(COLUMNAS*) VALUES(VALORES)
-INSERT INTO authors(author_id, name, nationality) VALUES('','Juan Rulfo','MEX');
+INSERT INTO authors(author_id, name, nationality) VALUES('0','Juan Rulfo','MEX');
 INSERT INTO authors(name, nationality) VALUES('Gabriel Garcia Márquez', 'COL');
 INSERT INTO authors() VALUES ('0', 'Juan Gabriel Vazquez', 'COL');
 
@@ -47,3 +49,22 @@ INSERT INTO authors(name, nationality) VALUES('Julio Cortazar', 'ARG'),
 ('Isabel Allende', 'CHI'),
 ('Octavio Paz','MEX'),
 ('Juan Carlos Onetti', 'URU');
+
+INSERT INTO clients (client_id, name, email, birthdate, gender) VALUES 
+(1, 'Maria Dolores Gomez', 'mariadolores.95983222J@random.names', '1971-06-06', 'F'), 
+(2, 'Adrian Fernandez', 'Adrian.55818851J@random.names', '1970-04-09', 'M'),
+(3, 'Maria Luisa Marin', 'MariaLuisa.83726282A@random.names', '1957-07-30', 'F'),
+(4, 'Pedro Sanchez', 'Pedro.785220559J@random.names', '1992-01-31', 'M');
+
+INSERT INTO clients (name, email, birthdate, gender, active) VALUES 
+('Pedro Sanchez', 'Pedro.785220559J@random.names', '1992-01-31', 'M', 0)
+ON DUPLICATE KEY UPDATE active = VALUES(active);
+
+-- como insertar sin query anidado
+INSERT INTO books(title, author_id) VALUES('El Laberinto de la Soledad', 6);
+
+-- cono insertar con query anidado, no se recomiendan
+INSERT INTO books(title, author_id, `year`)
+VALUES('Vuelta al Laberinto de la Soledad',
+(SELECT author_id FROM authors WHERE name = 'OCTAVIO PAZ'
+LIMIT 1), '1960');
