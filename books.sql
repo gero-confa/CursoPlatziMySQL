@@ -68,3 +68,14 @@ INSERT INTO books(title, author_id, `year`)
 VALUES('Vuelta al Laberinto de la Soledad',
 (SELECT author_id FROM authors WHERE name = 'OCTAVIO PAZ'
 LIMIT 1), '1960');
+
+-- SELECT
+SELECT name, email, gender FROM clients;
+SELECT (year)birthdate FROM clients;
+SELECT NOW();
+-- para tener nombre y edad
+SELECT name, YEAR(NOW()) - YEAR(birthdate) FROM clients;
+
+SELECT * FROM clients WHERE name LIKE '%Saave%';
+
+SELECT name, email, YEAR(NOW()) - YEAR(birthdate) AS edad, gender FROM clients WHERE gender = 'F' AND name LIKE '%Lop%';
