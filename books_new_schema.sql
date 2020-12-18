@@ -31,3 +31,26 @@ ORDER BY a.author_id ASC
 
 -- ORDER BY es key word para asignar orden lo puedo poner de cualquier columna y asc(endente) o desc(endente)
 -- GROUP BY escoge cual es el dato (en este caso el id de libro) y agrupa en base a lo que elegi, en este caso toma todos los libros de x autor y los junta dentro de este autor dandome la totalidad que escribio
+
+-- casos de negocio
+SELECT DISTINCT nationality FROM authors;
+-- keyword DISTINCT es para valores distintos dentro de una clumna
+
+SELECT nationality, count(author_id) AS c_authors
+FROM authors
+WHERE nationality IS NOT NULL
+AND nationality NOT IN('RUS', 'AUS')
+GROUP BY nationality 
+order by c_authors DESC, nationality ASC;
+-- el count() u otras funcioens requieren agruparse
+-- ORDER BY puede ser por varias columnas en orden que se escriben
+-- NOT IN('string') para quitar el string seleccionado aunque <> tambien funcionaria como 'desigual a'
+
+-- promedio de precios y desv estandar
+SELECT nationality, AVG(price) prom, STDDEV(price) AS std
+FROM books AS b
+INNER JOIN authors as a
+ON a.author_id = b.author_id
+GROUP BY nationality
+ORDER BY prom DESC
+;
