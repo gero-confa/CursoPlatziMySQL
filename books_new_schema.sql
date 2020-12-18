@@ -54,3 +54,28 @@ ON a.author_id = b.author_id
 GROUP BY nationality
 ORDER BY prom DESC
 ;
+
+-- maximos y minimos
+SELECT a.nationality, MAX(price), MIN(price)
+FROM books as b
+INNER JOIN authors as a
+ON a.author_id = b.author_id
+GROUP BY nationality
+;
+
+-- reporte final "que operacion, cuando y quien"
+-- CONCAT me va a generar una nueva columna con lo que tengo
+SELECT c.name , t.type, b.title, CONCAT(a.name, "(", a.nationality, ")") AS autor
+FROM transactions as t 
+LEFT JOIN clients as c 
+ ON c.client_id = t.client_id
+LEFT JOIN books as b 
+ ON b.book_id = t.book_id
+LEFT JOIN authors as a 
+ ON b.author_id = a.author_id
+;
+
+-- funcion nueva TO_DAYS() da dias entre 1ro de enero del año 0 hasta el dia de hoy
+SELECT TO_DAYS(NOW())
+-- ejeemplo mas basico
+SELECT TO_DAYS('0000-01-01')) este daria 1 porque es 1 el dia que paso desde TO_DAYS() hasta el dia '0000-01-01'
