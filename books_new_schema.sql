@@ -79,3 +79,31 @@ LEFT JOIN authors as a
 SELECT TO_DAYS(NOW())
 -- ejeemplo mas basico
 SELECT TO_DAYS('0000-01-01')) este daria 1 porque es 1 el dia que paso desde TO_DAYS() hasta el dia '0000-01-01'
+
+-- DELETE, ocmo truquito le pongo LIMIT 1 o la cantidad que se que tengo que borrar para no pasarme y cagarla
+DELETE from authors WHERE author_id = 161 LIMIT 1
+
+-- UPDATE
+UPDATE tabla
+SET [columna = valor]
+WHERE conditions;
+
+-- UPDATE APLICADO
+UPDATE clients 
+SET active = 0
+WHERE client_id = 80
+LIMIT 1;
+
+-- TRUNCATE borra el contenido pero deja la estructura de la tabla
+TRUNCATE tabla
+
+-- quitar columna
+ALTER TABLE tabla DROP COLUMN nombre_de_columna
+-- agregar columnas 
+ALTER TABLE tabla DROP ADD COLUMN nombre_de_columna
+
+-- mysqldump es en consola puede traer toda la base con los datos o la schema sin datos y la exporta en un .txt
+en lugar de mysql para entrar a la consola, uso "mysql -u root -p database" es un respaldo local
+
+para VERSIONAR, con mysqldump "mysql -u root -p  -d database" el "-d" vacia la schema
+"mysql -u root -p  -d database > esquema.sql" lo deja exportado en local
